@@ -15,5 +15,22 @@ pos3 │ tile7  │ tile6  │ tile5  │
 Example: 
 fact: (pred obj1 obj2)
 rule: ((pred obj1 obj2) (pred obj2 obj3)) -> (pred obj1 obj3)
-
 """
+
+fact: (loc tile1 pos1 pos1)
+fact: (loc tile2 pos2 pos1)
+fact: (loc tile3 pos3 pos1)
+fact: (loc tile8 pos1 pos2)
+fact: (loc empty pos2 pos2)
+fact: (loc tile4 pos3 pos2)
+fact: (loc tile7 pos1 pos3)
+fact: (loc tile6 pos2 pos3)
+fact: (loc tile5 pos3 pos3)
+
+rule: ((loc ?t ?x pos2) (loc ?t1 ?x ?y1)) -> (adjacent ?t ?t1)
+rule: ((loc ?t ?x ?y) (loc ?t1 ?x pos2)) -> (adjacent ?t ?t1)
+rule: ((loc ?t pos2 ?y) (loc ?t1 ?x1 ?y)) -> (adjacent ?t ?t1)
+rule: ((loc ?t ?x ?y) (loc ?t1 pos2 ?y)) -> (adjacent ?t ?t1)
+rule: ((adjacent ?t ?t1)) -> (adjacent ?t1 ?t)
+rule: ((adjacent ?t empty) (loc ?t ?x ?y) (loc empty ?x ?y1)) -> (movable ?t ?x ?y ?x ?y1)
+rule: ((adjacent ?t empty) (loc ?t ?x ?y) (loc empty ?x1 ?y)) -> (movable ?t ?x ?y ?x1 ?y)
